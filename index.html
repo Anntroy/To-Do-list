@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo list</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <header class="header">
+        <button  class="button" id="title" href="#0"><h1 class="header__button-h1">Todo list ...</h1></button>
+        <form class="header__form">
+            <div class="header__form-div">
+                <i class="header__form-div-i fa fa-search fa-lg"></i>
+                <input class="header__form-div-input" type="text" placeholder="Search.." name="search" id="inputSearch" autocomplete="off">
+            </div>
+        </form>
+    </header>
+    <dialog class="modal" id="modal" open>
+        <form class="modal__form" id="form">
+            <div class="modal__form-div">
+                <h2 class="modal__form-div-h2">New task</h2>
+                <hr>
+                <div class="modal__form-div-div">
+                    <label class="modal__form-div-label" for="title"><b>Title</b></label>
+                    <input class="modal__form-div-input" type="text" placeholder="Enter task title" id="title" pattern="{3,50}" required autocomplete="off">
+                    <button class="invalid-input hidden" id="invalidtitle">Title should contain 3 to 50 characters </button>
+                    <button class="invalid-input hidden" id="invalidSubmittitle">Please enter task title</button>
+                </div>
+                <div class="modal__form-div-div">
+                    <label class="modal__form-div-label" for="description"><b>Description</b></label>
+                    <textarea class="modal__form-div-textarea" type="description" placeholder="Enter description" id="description" pattern="{,500}" rows="5" required></textarea>
+                    <button class="invalid-input hidden" id="invaliddescription">Description should contain less than 500 characters</button>
+                    <button class="invalid-input hidden" id="invalidSubmitdescription">Please enter correct description</button>
+                </div>
+                <div class="modal__form-div-div-checkbox">
+                    <label class="modal__form-div-label" for="completed"><input type="checkbox" id="completed" name="completed"><span class="tab"></span>Completed</label>
+                    <label class="modal__form-div-label" for="important"><input type="checkbox" id="important" name="important"><span class="tab"></span>Important</label>
+                </div>
+                <div class="modal__form-div-div">
+                    <label class="modal__form-div-label" for="description"><b>Custom list</b></label>
+                    <select class="modal__form-div-input" id="custom_list" name="custom_list">
+                        <option value=""></option>
+                        <option value="saab">Saab</option>
+                        <option value="fiat">Fiat</option>
+                        <option value="audi">Audi</option>
+                    </select>
+                </div>
+                <div class="modal__form-div-div">
+                    <label class="modal__form-div-label" for="description"><b>Custom color</b></label>
+                    <select class="modal__form-div-input" id="custom_color" name="custom_color">
+                        <option value=""></option>
+                        <option value="purple">Purple</option>
+                        <option value="green">Green</option>
+                        <option value="yellow">Yellow</option>
+                        <option value="orange">Orange</option>
+                        <option value="grey">Grey</option>
+                        <option value="pink">Pink</option>
+                        <option value="blue">Blue</option>
+                    </select>
+                </div>
+                <div class="clearfix">
+                    <input class="submit cancel" type="submit" value="Cancel"/>
+                    <input class="submit create-task" type="submit" value="Create task"/>
+                </div>
+            </div>
+        </form>
+    </dialog>
+    <main>
+        <aside class="aside" id="aside">
+            <button class="aside__button button" id="tasks"><h2 class="aside__button-h2">Tasks</h2></button>
+            <button class="aside__button button" id="important"><h2 class="aside__button-h2">Important</h2></button>
+            <button class="aside__button button" id="completed"><h2 class="aside__button-h2">Completed</h2></button>
+            <button class="aside__button button" id="custom_lists"><h2 class="aside__button-h2">Custom lists</h2></button>
+        </aside>
+    </main>
+    <script src="main.js"></script>
+    <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+</body>
+</html>
