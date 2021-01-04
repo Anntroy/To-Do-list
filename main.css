@@ -17,7 +17,7 @@ html {
     --light-grey: #f1f1f1;
     --middle-dark: #555;
     --white-title: rgb(248, 246, 246);
-    --red-error: rgb(173, 32, 32);
+    --red-error: rgb(192, 10, 10);
     --dark: #30333b;
     --purple: purple;
     --green: green;
@@ -48,7 +48,7 @@ html {
     justify-content: center;
 }
 
-.button {
+.btn {
     width: 20vw;
     height: 12vh;
     min-height: 44px;
@@ -61,6 +61,7 @@ html {
 .header__button-h1 {
     font-weight: 600;
     color: var(--white-title);
+    text-shadow: 2px 2px 4px #000000;
 }
 
 .header__form-div {
@@ -96,7 +97,7 @@ html {
     display: none;
 }
 
-.modal {
+.dialog {
     position: fixed;
     left: 0;
     top: 0;
@@ -106,47 +107,43 @@ html {
     padding-top: 5rem;
 }
 
-.modal__form {
+.dialog__form {
     background-color: var(--middle-dark);
     margin: 6vh auto 15vh auto;
-    border: 3px solid var(--light-grey);
     width: 80vw;
     max-width: 50rem;
     border-radius: 5px;
+    box-shadow: 2px 2px 4px #000000;
 }
 
-.modal__form-div {
+.dialog__form-div {
     padding: 3vh;
-    margin-bottom: 3.5vh;
 }
 
-.modal__form-div-div{
-    margin: 3vh 0;
+.dialog__form-div-div{
+    margin: 3vh 0 1vh 0;
 }
 
-.modal__form-div-h2 {
+.dialog__form-div-h2 {
     font-size: 2rem;
     color: var(--white-title);
     text-align: center;
-}
-
-hr {
-    border: 0.5px solid var(--light-grey);
     margin-bottom: 2.5rem;
     margin-top: 1rem;
 }
 
-.modal__form-div-label{
+.dialog__form-div-label{
     margin-top: 2vh;
+    font-size: 1.6rem;
+    color: var(--white-title);
+}
+
+.dialog__form-div-label b {
+    color: var(--white-title);
     font-size: 1.8rem;
-    color: var(--white-title);
 }
 
-.modal__form-div-label b {
-    color: var(--white-title);
-}
-
-.modal__form-div-input {
+.dialog__form-div-input {
     width: 100%;
     padding: 1vh;
     font-size: 1.6rem;
@@ -156,11 +153,17 @@ hr {
     background-color: white;
 }
 
-input[type=text]:focus, input[type=password]:focus, textarea:focus, select:focus {
+.dialog__form-div-input:focus, .dialog__form-div-textarea:focus {
+    border: 2px solid var(--grey);
+    background: linear-gradient(360deg, #dee1e1 20%, #f4f4f4 360%);
     outline: none;
 }
 
-.modal__form-div-textarea {
+.border-red {
+    border: 2px solid var(--red-error);
+}
+
+.dialog__form-div-textarea {
     width: 100%;
     padding: 1vh;
     font-size: 1.6rem;
@@ -176,13 +179,14 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus, select:focus
     top: -1vh;
     font-size: 1.2rem;
     font-weight: 500;
-    color: var(--red-error);
+    color: var(--light-grey);
     text-align: center;
     border: none;
     background-color: transparent;
+    margin-top: 2vh;
 }
 
-.modal__form-div-div-checkbox {
+.dialog__form-div-div-checkbox {
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -197,7 +201,7 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus, select:focus
 }
 
 .submit {
-    background-color: transparent;
+    background-color: var(--white-title);
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
@@ -206,11 +210,10 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus, select:focus
     font-size: 1.7rem;
     font-weight: 700;
     border-radius: 5px;
-    color: var(--white-title);
+    box-shadow: 2px 2px 4px var(--dark);
 }
 .submit:hover {
-    background-color:  var(--middle-dark);
-    opacity:1;
+    transform: scale(1.04);
 }
 
 .cancel {
@@ -223,9 +226,13 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus, select:focus
     width: 45%;
 }
 
+.not-allowed {
+    cursor: not-allowed;
+}
+
 .clearfix {
     position: relative;
-    top: 3vh;
+    top: 1vh;
 }
 
 .clearfix::after {
@@ -274,4 +281,27 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus, select:focus
 
 .aside__button-h2 {
     color: var(--white-title);
+    text-shadow: 2px 2px 4px #000000;
+}
+
+/* FOOTER AREA */
+
+.footer {
+    display: flex;
+}
+
+.footer__button {
+    position: absolute;
+    bottom: 4vh;
+    right: 5vh;
+    width: 8vh;
+    height: 8vh;
+    background-color: var(--middle-dark);
+    border: 1px var(--dark);
+    border-radius: 50%;
+}
+
+.footer__button i {
+    color: var(--white-title);
+    text-shadow: 2px 2px 4px #000000;
 }
