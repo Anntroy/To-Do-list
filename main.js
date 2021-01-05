@@ -17,15 +17,16 @@ const expressions = {
 }
 
 const createTask = {
-	ttitle: '',
-	tdescription: '',
-	tcompleated: '',
-	timportant: '',
-	tcustom: '',
-	tcolor: '',
+	cid: '',
+	ctitle: '',
+	cdescription: '',
+	ccompleated: '',
+	cimportant: '',
+	ccustom: '',
+	ccolor: '',
 }
 
-const makeTask = (mtitle, mdescription, mcompleated, mimportant, mcustom, mcolor) => ({mtitle, mdescription, mcompleated, mimportant, mcustom, mcolor});
+const makeTask = (tid, ttitle, tdescription, tcompleated, timportant, tcustom, tcolor) => ({tid, ttitle, tdescription, tcompleated, timportant, tcustom, tcolor});
 
 let taskIsValid = {
 	title: false,
@@ -33,12 +34,11 @@ let taskIsValid = {
 }
 
 let tasksArray = [];
-let id = 0;
+let currantTaskId = [0];
 
 window.addEventListener('load', loadTasks);
 tasksList.addEventListener('click', toggleForClassStar);
 tasksList.addEventListener('click', toggleForClassCircle);
-// tasksList.addEventListener('click', toggleForClassSummary);
 
 function loadTasks(){
 	if(JSON.parse(localStorage.getItem("tasks")) !== null){
@@ -51,15 +51,14 @@ const displayTasks = (tasks) => {
 
 	const htmlString = tasks
 		.map((task) => {
-			id++
 			return `
-			<li class="task">
-			<span class="far fa-circle fa-lg circle" id="${id}"></span>
+			<li class="task" id="${task.tid}">
+			<span class="far fa-circle fa-lg circle" id="${task.tid}"></span>
 			<details class="details">
-				<summary class="summary ${task.mcompleated}">${task.mtitle}</summary>
-				<p>Description:<br>${task.mdescription}</p>
+				<summary class="summary ${task.tcompleated}">${task.ttitle}</summary>
+				<p>Description:<br>${task.tdescription}</p>
 			</details>
-			<span class="fa fa-star fa-lg star ${task.mimportant}"></span>
+			<span class="fa fa-star fa-lg star ${task.timportant}"></span>
 		</li>
 		`;
 		})
@@ -83,18 +82,12 @@ function toggleForClassStar(e){
 	}
 }
 
-// function toggleForClassSummary(e){
-// 	if(e.target.classList.contains('summary')){
-// 		e.target.classList.toggle('compleated');
-// 		console.log(e.target.classList)
-// 	}
-// }
-
 function toggleForClassCircle(e){
 	if(e.target.classList.contains('circle')){
 		toggleCircleIcon(e.target);
 		e.target.nextElementSibling.children[0].classList.toggle('compleated');
 		e.target.parentNode.classList.toggle('touched');
 		console.log(e.target.parentNode)
+		console.log(tasksArray)
 	}
 }

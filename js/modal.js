@@ -7,7 +7,7 @@ description.addEventListener('blur', validateTaskObligatoryFilds);
 dialog.addEventListener('transitionend', focusInsideModal)
 
 function openAddTaskModal(){
-    dialog.show();
+    dialog.showModal();
 }
 
 function closeAddTaskModal(){
@@ -40,7 +40,7 @@ function validateTaskModal(e){
 		case 'title':
 			if(expressions.etitle.test(e.target.value)){
 				taskIsValid.title = true;
-				createTask.ttitle = e.target.value;
+				createTask.ctitle = e.target.value;
 				invalidTitle.classList.add('hidden');
 				title.classList.remove('border-red');
 			}
@@ -55,7 +55,7 @@ function validateTaskModal(e){
 		case 'description':
 			if(expressions.edescription.test(e.target.value)){
 				taskIsValid.description = true;
-				createTask.tdescription = e.target.value;
+				createTask.cdescription = e.target.value;
 				invalidDescription.classList.add('hidden');
 				description.classList.remove('border-red');
 			}
@@ -68,16 +68,16 @@ function validateTaskModal(e){
 			}
 		break;
 		case 'completed':
-			createTask.tcompleated = 'completed'
+			createTask.ccompleated = 'completed'
 		break;
 		case 'important':
-			createTask.timportant = 'important';
+			createTask.cimportant = 'important';
 		break;
 		case 'custom_list':
-			createTask.tcustom = e.target.value;
+			createTask.ccustom = e.target.value;
 			break;
 		case 'custom_color':
-				createTask.tcolor = e.target.value;
+				createTask.ccolor = e.target.value;
 		break;
 	}
 }
@@ -90,8 +90,18 @@ else {
 	tasksArray = JSON.parse(localStorage.getItem("tasks"));
 }
 
+if(JSON.parse(localStorage.getItem("currantTaskId")) === null){
+	localStorage.setItem('currantTaskId', JSON.stringify(currantTaskId));
+}
+else {
+	currantTaskId = JSON.parse(localStorage.getItem("currantTaskId"));
+}
+
 function createNewTask(){
-	const task = makeTask(createTask.ttitle, createTask.tdescription, createTask.tcompleated, createTask.timportant, createTask.tcustom, createTask.tcolor);
+	createTask.cid = currantTaskId[0];
+	const task = makeTask(createTask.cid, createTask.ctitle, createTask.cdescription, createTask.ccompleated, createTask.cimportant, createTask.ccustom, createTask.ccolor);
 	tasksArray.push(task);
 	localStorage.setItem("tasks", JSON.stringify(tasksArray));
+	currantTaskId.splice(0, 1, currantTaskId[0] + 1);
+	localStorage.setItem("currantTaskId", JSON.stringify(currantTaskId));
 }

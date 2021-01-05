@@ -15,7 +15,7 @@ html {
 
 :root {
     --light-grey: #f1f1f1;
-    --middle-dark: #555;
+    --middle-dark: rgb(85, 85, 85);
     --white-title: rgb(248, 246, 246);
     --red-error: rgb(192, 10, 10);
     --dark: #30333b;
@@ -105,11 +105,11 @@ html {
     height: 100vh;
     overflow: auto;
     padding-top: 5rem;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(85, 85, 85, 0.3);
 }
 
 .dialog[open]:not(:focus-within) {
-    background-color: rgb(255, 255, 254);
+    background-color: rgb(85, 85, 84, 0.3);
     transition: background-color 0.01s;
 }
 
@@ -294,7 +294,6 @@ html {
 
 .compleated {
     text-decoration: line-through;
-    /* color: #fff; */
 }
 
 .touched {
