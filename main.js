@@ -1,4 +1,5 @@
 const get = document.getElementById.bind(document);
+const tasksList = get('tasksList');
 const addTask = get('addTask');
 const dialog = get('dialog');
 const form = get('form');
@@ -8,10 +9,11 @@ const invalidTitle = get('invalidTitle');
 const invalidDescription = get('invalidDescription');
 const cancelBtn = get('cancelBtn');
 const createBtn = get('createBtn');
+const starImportant = document.querySelectorAll('.star');
 
 const expressions = {
-	etitle: /^[\w\W]{3,10}$/,
-	edescription: /^[\w\W]{1,5}$/,
+	etitle: /^[\w\W]{3,50}$/,
+	edescription: /^[\w\W]{1,500}$/,
 }
 
 const createTask = {
@@ -31,98 +33,68 @@ let taskIsValid = {
 }
 
 let tasksArray = [];
+let id = 0;
 
-addTask.addEventListener('click', openAddTaskModal);
-form.addEventListener('change', validateTaskModal);
-cancelBtn.addEventListener('click', closeAddTaskModal);
-createBtn.addEventListener('click', createNewTask);
-title.addEventListener('blur', validateTaskObligatoryFilds);
-description.addEventListener('blur', validateTaskObligatoryFilds);
+window.addEventListener('load', loadTasks);
+tasksList.addEventListener('click', toggleForClassStar);
+tasksList.addEventListener('click', toggleForClassCircle);
+// tasksList.addEventListener('click', toggleForClassSummary);
 
-function validateTaskObligatoryFilds(){
-	const formValues = Object.values(taskIsValid)
-	const valid = formValues.findIndex(value => value == false)
-	if(valid == -1){
-		createBtn.removeAttribute('disabled');
-		createBtn.classList.remove('not-allowed');
-	}
-	else {
-		createBtn.setAttribute('disabled', true);
-		createBtn.classList.add('not-allowed');
-	}
-	invalidTitle.blur();
-	invalidDescription.blur();
-}
-
-
-function validateTaskModal(e){
-	console.log('aqui')
-    switch (e.target.name) {
-		case 'title':
-			if(expressions.etitle.test(e.target.value)){
-				taskIsValid.title = true;
-				createTask.ttitle = e.target.value;
-				invalidTitle.classList.add('hidden');
-				title.classList.remove('border-red');
-			}
-			else{
-				taskIsValid.title = false;
-				e.preventDefault();
-				e.stopPropagation();
-				invalidTitle.classList.remove('hidden');
-				title.classList.add('border-red');
-			}
-		break;
-		case 'description':
-			if(expressions.edescription.test(e.target.value)){
-				taskIsValid.description = true;
-				createTask.tdescription = e.target.value;
-				invalidDescription.classList.add('hidden');
-				description.classList.remove('border-red');
-			}
-			else{
-				taskIsValid.description = false;
-				e.preventDefault();
-				e.stopPropagation();
-				invalidDescription.classList.remove('hidden');
-				description.classList.add('border-red');
-			}
-		break;
-		case 'completed':
-			createTask.tcompleated = 'completed'
-		break;
-		case 'important':
-			createTask.timportant = 'important';
-		break;
-		case 'custom_list':
-			createTask.tcustom = e.target.value;
-			break;
-		case 'custom_color':
-				createTask.tcolor = e.target.value;
-		break;
+function loadTasks(){
+	if(JSON.parse(localStorage.getItem("tasks")) !== null){
+		tasksArray = JSON.parse(localStorage.getItem("tasks"));
+		displayTasks(tasksArray);
 	}
 }
 
+const displayTasks = (tasks) => {
 
-function openAddTaskModal(){
-    dialog.show();
+	const htmlString = tasks
+		.map((task) => {
+			id++
+			return `
+			<li class="task">
+			<span class="far fa-circle fa-lg circle" id="${id}"></span>
+			<details class="details">
+				<summary class="summary ${task.mcompleated}">${task.mtitle}</summary>
+				<p>Description:<br>${task.mdescription}</p>
+			</details>
+			<span class="fa fa-star fa-lg star ${task.mimportant}"></span>
+		</li>
+		`;
+		})
+		.join('');
+	tasksList.innerHTML = htmlString;
+
+};
+
+const toggleCircleIcon = (elem) => {
+
+	elem.classList.toggle("fa-check-circle");
+	elem.classList.toggle("fa-circle");
+	return elem;
+
+	}
+
+function toggleForClassStar(e){
+	if(e.target.classList.contains('star')){
+		e.target.classList.toggle('important');
+		console.log(e.target.classList)
+	}
 }
 
-function closeAddTaskModal(){
-    dialog.close()
-}
+// function toggleForClassSummary(e){
+// 	if(e.target.classList.contains('summary')){
+// 		e.target.classList.toggle('compleated');
+// 		console.log(e.target.classList)
+// 	}
+// }
 
-if(JSON.parse(localStorage.getItem("tasks")) === null){
-	localStorage.setItem('tasks', JSON.stringify(tasksArray));
-}
-else {
-	tasksArray = JSON.parse(localStorage.getItem("tasks"));
-}
-
-function createNewTask(){
-	const task = makeTask(createTask.ttitle, createTask.tdescription, createTask.tcompleated, createTask.timportant, createTask.tcustom, createTask.tcolor);
-	console.log(createTask);
-	tasksArray.push(task);
-	console.log(tasksArray);
-	localStorage.setItem("tasks", JSON.stringify(tasksArray));
+function toggleForClassCircle(e){
+	if(e.target.classList.contains('circle')){
+		toggleCircleIcon(e.target);
+		e.target.nextElementSibling.children[0].classList.toggle('compleated');
+		e.target.parentNode.classList.toggle('touched');
+		console.log(e.target.parentNode)
+	}
 }

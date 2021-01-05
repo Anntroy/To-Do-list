@@ -105,6 +105,12 @@ html {
     height: 100vh;
     overflow: auto;
     padding-top: 5rem;
+    background-color: rgb(255, 255, 255);
+}
+
+.dialog[open]:not(:focus-within) {
+    background-color: rgb(255, 255, 254);
+    transition: background-color 0.01s;
 }
 
 .dialog__form {
@@ -128,8 +134,8 @@ html {
     font-size: 2rem;
     color: var(--white-title);
     text-align: center;
-    margin-bottom: 2.5rem;
-    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    margin-top: 0.8rem;
 }
 
 .dialog__form-div-label{
@@ -177,7 +183,7 @@ html {
     padding: 1vh;
     position: relative;
     top: -1vh;
-    font-size: 1.2rem;
+    font-size: 1.45rem;
     font-weight: 500;
     color: var(--light-grey);
     text-align: center;
@@ -190,7 +196,7 @@ html {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    margin: 2rem 0 1rem 0;
+    margin: 1.5rem 0 1rem 0;
     font-size: 1.4rem;
     font-weight: 600;
 }
@@ -242,6 +248,79 @@ html {
 }
 
 /* MAIN AREA */
+
+
+.article__ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 3vh;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    width: 76vw;
+    cursor: pointer;
+    margin: 1vh 2vh 0 2vh;
+    padding: 12px 8px 12px 12px;
+    list-style-type: none;
+    border: 1px solid var(--middle-dark);
+    border-radius: 5px;
+    background: #eee;
+    font-size: 1.4rem;
+    transition: 0.2s;
+
+    /* make the list items unselectable */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.details {
+    margin-left: 2vh;
+}
+
+.summary:focus {
+    outline: none;
+}
+.summary {
+    font-weight: bold;
+    font-size: 1.4em;
+    padding-left: 10px;
+}
+
+
+.compleated {
+    text-decoration: line-through;
+    /* color: #fff; */
+}
+
+.touched {
+    background: #888;
+}
+
+.task p {
+    font-size: 1.2em;
+    padding-top: 5px;
+    margin-left: 0.9em;
+}
+
+.star {
+    margin-left: auto;
+    margin-right: 1vh;
+}
+
+.important {
+    color: orange;
+}
+
+/* ASIDE AREA */
+
+.aside {
+    background-color: var(--dark);
+}
 
 .aside__button{
     position: absolute;
