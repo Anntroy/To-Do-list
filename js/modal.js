@@ -73,7 +73,7 @@ function validateTaskModal(e){
 		case 'important':
 			createTask.cimportant = 'important';
 		break;
-		case 'custom_list':
+		case 'custom_lists':
 			createTask.ccustom = e.target.value;
 			break;
 		case 'custom_color':

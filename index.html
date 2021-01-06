@@ -37,8 +37,8 @@
                     <label class="dialog__form-div-label" for="important"><input type="checkbox" id="important" name="important"><span class="tab"></span>Important</label>
                 </div>
                 <div class="dialog__form-div-div">
-                    <label class="dialog__form-div-label" for="custom_list"><b>Custom list</b></label>
-                    <select class="dialog__form-div-input" id="custom_list" name="custom_list">
+                    <label class="dialog__form-div-label" for="custom_lists"><b>Custom list</b></label>
+                    <select class="dialog__form-div-input" id="custom_lists" name="custom_lists">
                         <option value=""></option>
                         <option value="saab">Saab</option>
                         <option value="fiat">Fiat</option>
@@ -67,10 +67,10 @@
     </dialog>
     <main>
         <aside class="aside" id="aside">
-            <button class="aside__button btn" id="tasks"><h2 class="aside__button-h2">Tasks</h2></button>
-            <button class="aside__button btn" id="important"><h2 class="aside__button-h2">Important</h2></button>
-            <button class="aside__button btn" id="completed"><h2 class="aside__button-h2">Completed</h2></button>
-            <button class="aside__button btn" id="custom_lists"><h2 class="aside__button-h2">Custom lists</h2></button>
+            <button class="aside__button btn aside__button-open" id="tasks_list" name="tasks_list">Tasks</button>
+            <button class="aside__button btn" id="important_list" name="important_list">Important</button>
+            <button class="aside__button btn" id="completed_list" name="completed_list">Completed</button>
+            <button class="aside__button btn" id="custom_list" name="custom_list">Custom lists</button>
         </aside>
         <article>
             <ul class="article__ul" id="tasksList">
@@ -92,6 +92,7 @@
     </footer>
     <script src="main.js"></script>
     <script src="js/modal.js"></script>
+    <script src="js/aside.js"></script>
     <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
 </body>
 </html>

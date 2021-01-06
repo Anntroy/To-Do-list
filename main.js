@@ -1,6 +1,7 @@
 const get = document.getElementById.bind(document);
 const tasksList = get('tasksList');
 const addTask = get('addTask');
+const aside = get('aside');
 const dialog = get('dialog');
 const form = get('form');
 const title = get('title');
@@ -52,8 +53,8 @@ const displayTasks = (tasks) => {
 	const htmlString = tasks
 		.map((task) => {
 			return `
-			<li class="task" id="${task.tid}">
-			<span class="far fa-circle fa-lg circle" id="${task.tid}"></span>
+			<li class="task task-${task.tcompleated}" id="${task.tid}">
+			<span class="far fa-circle fa-lg circle"></span>
 			<details class="details">
 				<summary class="summary ${task.tcompleated}">${task.ttitle}</summary>
 				<p>Description:<br>${task.tdescription}</p>
@@ -85,8 +86,9 @@ function toggleForClassStar(e){
 function toggleForClassCircle(e){
 	if(e.target.classList.contains('circle')){
 		toggleCircleIcon(e.target);
-		e.target.nextElementSibling.children[0].classList.toggle('compleated');
-		e.target.parentNode.classList.toggle('touched');
+		e.target.nextElementSibling.children[0].classList.toggle('completed');
+		e.target.parentNode.classList.remove('task-');
+		e.target.parentNode.classList.toggle('task-completed');
 		console.log(e.target.parentNode)
 		console.log(tasksArray)
 	}
