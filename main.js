@@ -1,6 +1,7 @@
 const get = document.getElementById.bind(document);
 const tasksList = get('tasksList');
 const addTask = get('addTask');
+const inputSearch = get('inputSearch');
 const aside = get('aside');
 const dialog = get('dialog');
 const form = get('form');
@@ -22,13 +23,12 @@ const createTask = {
 	ctitle: '',
 	cdescription: '',
 	ccompleted: '',
-	cchecked: '',
 	cimportant: '',
 	ccustom: '',
 	ccolor: '',
 }
 
-const makeTask = (tid, ttitle, tdescription, tcompleted, tchecked, timportant, tcustom, tcolor) => ({tid, ttitle, tdescription, tcompleted, tchecked, timportant, tcustom, tcolor});
+const makeTask = (tid, ttitle, tdescription, tcompleted, timportant, tcustom, tcolor) => ({tid, ttitle, tdescription, tcompleted, timportant, tcustom, tcolor});
 
 let taskIsValid = {
 	title: false,
@@ -46,7 +46,6 @@ tasksList.addEventListener('click', toggleForClassCircle);
 function loadTasks(){
 	if(JSON.parse(localStorage.getItem("tasks")) !== null){
 		tasksArray = JSON.parse(localStorage.getItem("tasks"));
-		displayTasks(tasksArray);
 	}
 }
 
@@ -55,7 +54,7 @@ const displayTasks = (tasks, checked) => {
 	const htmlString = tasks
 		.map((task) => {
 			return `
-			<li class="task task-${task.tcompleted} ${task.tcolor} ${task.tcustom} ${task.tchecked}" id="${task.tid}">
+			<li class="task task-${task.tcompleted} ${task.tcolor} ${task.tcustom}" id="${task.tid}">
 			<span class="far ${checked} fa-lg circle"></span>
 			<details class="details">
 				<summary class="summary ${task.tcompleted}">${task.ttitle}</summary>
@@ -66,8 +65,7 @@ const displayTasks = (tasks, checked) => {
 		`;
 		})
 		.join('');
-	tasksList.innerHTML = htmlString;
-
+	return htmlString
 };
 
 const toggleCircleIcon = (elem) => {
@@ -85,6 +83,7 @@ else {
 	tasksArray = JSON.parse(localStorage.getItem("tasks"));
 }
 
+
 if(JSON.parse(localStorage.getItem("currantTaskId")) === null){
 	localStorage.setItem('currantTaskId', JSON.stringify(currantTaskId));
 }
@@ -99,13 +98,24 @@ function displayMainTasks(){
 			!task.tcustom.includes('true')
 		);
 	});
-	displayTasks(mainTasks);
+	tasksList.innerHTML = displayTasks(mainTasks, "fa-circle");
 }
 
 function toggleForClassStar(e){
 	if(e.target.classList.contains('star')){
 		e.target.classList.toggle('important');
-		console.log(e.target.classList)
+		console.log(e.target.parentNode.id);
+		const filteredStarTask = tasksArray.filter((task) => {
+			return task.tid.toString().includes(e.target.parentNode.id);
+		});
+		if(filteredStarTask.length === 1){
+			toggleProperty(filteredStarTask[0].timportant, 'important');
+		}
+		const filteredStarTasks = tasksArray.filter((task) => {
+			return !task.tid.toString().includes(e.target.parentNode.id);
+		});
+		tasksArray = filteredStarTasks.concat(filteredStarTask);
+		localStorage.setItem("tasks", JSON.stringify(tasksArray));
 	}
 }
 
@@ -115,5 +125,27 @@ function toggleForClassCircle(e){
 		e.target.nextElementSibling.children[0].classList.toggle('completed');
 		e.target.parentNode.classList.remove('task-');
 		e.target.parentNode.classList.toggle('task-completed');
+		console.log(e.target.parentNode.id);
+		console.log(tasksArray);
+		const filteredCircleTask = tasksArray.filter((task) => {
+			return task.tid.toString().includes(e.target.parentNode.id);
+		});
+		if(filteredCircleTask.length === 1){
+			toggleProperty(filteredCircleTask[0].tcompleted, 'completed');
+		}
+		const filteredCircleTasks = tasksArray.filter((task) => {
+			return !task.tid.toString().includes(e.target.parentNode.id);
+		});
+		tasksArray = filteredCircleTasks.concat(filteredCircleTask);
+		localStorage.setItem("tasks", JSON.stringify(tasksArray));
+	}
+}
+
+function toggleProperty(property, str){
+	if(property === ''){
+		property = str;
+	}
+	else {
+		property = '';
 	}
 }

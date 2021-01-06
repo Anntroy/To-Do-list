@@ -69,7 +69,6 @@ function validateTaskModal(e){
 		break;
 		case 'completed':
 			createTask.ccompleted = 'completed'
-			createTask.cchecked = 'true'
 		break;
 		case 'important':
 			createTask.cimportant = 'important';
@@ -85,7 +84,7 @@ function validateTaskModal(e){
 
 function createNewTask(){
 	createTask.cid = currantTaskId[0];
-	const task = makeTask(createTask.cid, createTask.ctitle, createTask.cdescription, createTask.ccompleted, createTask.cchecked,createTask.cimportant, createTask.ccustom, createTask.ccolor);
+	const task = makeTask(createTask.cid, createTask.ctitle, createTask.cdescription, createTask.ccompleted, createTask.cimportant, createTask.ccustom, createTask.ccolor);
 	tasksArray.push(task);
 	localStorage.setItem("tasks", JSON.stringify(tasksArray));
 	currantTaskId.splice(0, 1, currantTaskId[0] + 1);

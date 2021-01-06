@@ -310,9 +310,6 @@ html {
     text-decoration: line-through;
 }
 
-.task-completed {
-    background: #888;
-}
 
 .purple {
     background-color: var(--purple);
@@ -341,6 +338,11 @@ html {
 .orange {
     background-color: var(--brown);
 }
+
+.task-completed {
+    background: #888;
+}
+
 
 /* ASIDE AREA */
 
