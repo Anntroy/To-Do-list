@@ -21,13 +21,14 @@ const createTask = {
 	cid: '',
 	ctitle: '',
 	cdescription: '',
-	ccompleated: '',
+	ccompleted: '',
+	cchecked: '',
 	cimportant: '',
 	ccustom: '',
 	ccolor: '',
 }
 
-const makeTask = (tid, ttitle, tdescription, tcompleated, timportant, tcustom, tcolor) => ({tid, ttitle, tdescription, tcompleated, timportant, tcustom, tcolor});
+const makeTask = (tid, ttitle, tdescription, tcompleted, tchecked, timportant, tcustom, tcolor) => ({tid, ttitle, tdescription, tcompleted, tchecked, timportant, tcustom, tcolor});
 
 let taskIsValid = {
 	title: false,
@@ -38,6 +39,7 @@ let tasksArray = [];
 let currantTaskId = [0];
 
 window.addEventListener('load', loadTasks);
+window.addEventListener('load', displayMainTasks);
 tasksList.addEventListener('click', toggleForClassStar);
 tasksList.addEventListener('click', toggleForClassCircle);
 
@@ -48,15 +50,15 @@ function loadTasks(){
 	}
 }
 
-const displayTasks = (tasks) => {
+const displayTasks = (tasks, checked) => {
 
 	const htmlString = tasks
 		.map((task) => {
 			return `
-			<li class="task task-${task.tcompleated}" id="${task.tid}">
-			<span class="far fa-circle fa-lg circle"></span>
+			<li class="task task-${task.tcompleted} ${task.tcolor} ${task.tcustom} ${task.tchecked}" id="${task.tid}">
+			<span class="far ${checked} fa-lg circle"></span>
 			<details class="details">
-				<summary class="summary ${task.tcompleated}">${task.ttitle}</summary>
+				<summary class="summary ${task.tcompleted}">${task.ttitle}</summary>
 				<p>Description:<br>${task.tdescription}</p>
 			</details>
 			<span class="fa fa-star fa-lg star ${task.timportant}"></span>
@@ -76,6 +78,30 @@ const toggleCircleIcon = (elem) => {
 
 	}
 
+if(JSON.parse(localStorage.getItem("tasks")) === null){
+	localStorage.setItem('tasks', JSON.stringify(tasksArray));
+}
+else {
+	tasksArray = JSON.parse(localStorage.getItem("tasks"));
+}
+
+if(JSON.parse(localStorage.getItem("currantTaskId")) === null){
+	localStorage.setItem('currantTaskId', JSON.stringify(currantTaskId));
+}
+else {
+	currantTaskId = JSON.parse(localStorage.getItem("currantTaskId"));
+}
+
+function displayMainTasks(){
+	const mainTasks = tasksArray.filter((task) => {
+		return (
+			!task.tcompleted.includes('completed') &&
+			!task.tcustom.includes('true')
+		);
+	});
+	displayTasks(mainTasks);
+}
+
 function toggleForClassStar(e){
 	if(e.target.classList.contains('star')){
 		e.target.classList.toggle('important');
@@ -89,7 +115,5 @@ function toggleForClassCircle(e){
 		e.target.nextElementSibling.children[0].classList.toggle('completed');
 		e.target.parentNode.classList.remove('task-');
 		e.target.parentNode.classList.toggle('task-completed');
-		console.log(e.target.parentNode)
-		console.log(tasksArray)
 	}
 }

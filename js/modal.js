@@ -68,13 +68,14 @@ function validateTaskModal(e){
 			}
 		break;
 		case 'completed':
-			createTask.ccompleated = 'completed'
+			createTask.ccompleted = 'completed'
+			createTask.cchecked = 'true'
 		break;
 		case 'important':
 			createTask.cimportant = 'important';
 		break;
 		case 'custom_lists':
-			createTask.ccustom = e.target.value;
+			createTask.ccustom = 'true';
 			break;
 		case 'custom_color':
 				createTask.ccolor = e.target.value;
@@ -82,24 +83,9 @@ function validateTaskModal(e){
 	}
 }
 
-
-if(JSON.parse(localStorage.getItem("tasks")) === null){
-	localStorage.setItem('tasks', JSON.stringify(tasksArray));
-}
-else {
-	tasksArray = JSON.parse(localStorage.getItem("tasks"));
-}
-
-if(JSON.parse(localStorage.getItem("currantTaskId")) === null){
-	localStorage.setItem('currantTaskId', JSON.stringify(currantTaskId));
-}
-else {
-	currantTaskId = JSON.parse(localStorage.getItem("currantTaskId"));
-}
-
 function createNewTask(){
 	createTask.cid = currantTaskId[0];
-	const task = makeTask(createTask.cid, createTask.ctitle, createTask.cdescription, createTask.ccompleated, createTask.cimportant, createTask.ccustom, createTask.ccolor);
+	const task = makeTask(createTask.cid, createTask.ctitle, createTask.cdescription, createTask.ccompleted, createTask.cchecked,createTask.cimportant, createTask.ccustom, createTask.ccolor);
 	tasksArray.push(task);
 	localStorage.setItem("tasks", JSON.stringify(tasksArray));
 	currantTaskId.splice(0, 1, currantTaskId[0] + 1);
