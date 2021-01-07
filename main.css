@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro&display=swap');
 
-/* Global styles */
+/* GLOBAL STYLES */
 * {
     margin: 0;
     padding: 0;
@@ -14,6 +14,7 @@ html {
 }
 
 :root {
+    --black: #000000;
     --light-grey: #f1f1f1;
     --middle-dark: rgb(85, 85, 85);
     --white-title: rgb(248, 246, 246);
@@ -31,7 +32,6 @@ html {
 /* HEADER AREA */
 
 .header{
-    /* background: linear-gradient(360deg, #c1d3d3 10%, #bb4747 360%); */
     background-color: var(--middle-dark);
     height: 12vh;
     font-size: 1.1rem;
@@ -61,7 +61,7 @@ html {
 .header__button-h1 {
     font-weight: 600;
     color: var(--white-title);
-    text-shadow: 2px 2px 4px #000000;
+    text-shadow: 2px 2px 4px var(--black);
 }
 
 .header__form-div {
@@ -72,12 +72,10 @@ html {
     width: 40vw;
     height: 5vh;
     line-height: 5vh;
-	/* background: #fff; */
 	border: 3px solid transparent;
 	border-radius: 10px;
     padding: 0 10px 0 40px;
     font-size: 1.5rem;
-	/* transition: .3s ease all; */
 }
 
 .header__form-div-input:focus {
@@ -119,7 +117,7 @@ html {
     width: 80vw;
     max-width: 50rem;
     border-radius: 5px;
-    box-shadow: 2px 2px 4px #000000;
+    box-shadow: 2px 2px 4px var(--black);
 }
 
 .dialog__form-div {
@@ -363,7 +361,7 @@ html {
     color: var(--white-title);
     font-size: 2.2em;
     font-weight: 600;
-    text-shadow: 2px 2px 4px #000000;
+    text-shadow: 2px 2px 4px var(--black);
     text-align: center;
 }
 
@@ -411,5 +409,5 @@ html {
 
 .footer__button i {
     color: var(--white-title);
-    text-shadow: 2px 2px 4px #000000;
+    text-shadow: 2px 2px 4px var(--black);
 }

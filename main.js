@@ -104,12 +104,16 @@ function displayMainTasks(){
 function toggleForClassStar(e){
 	if(e.target.classList.contains('star')){
 		e.target.classList.toggle('important');
-		console.log(e.target.parentNode.id);
 		const filteredStarTask = tasksArray.filter((task) => {
 			return task.tid.toString().includes(e.target.parentNode.id);
 		});
 		if(filteredStarTask.length === 1){
-			toggleProperty(filteredStarTask[0].timportant, 'important');
+			if(filteredStarTask[0].timportant === ''){
+				filteredStarTask[0].timportant = 'important';
+			}
+			else {
+				filteredStarTask[0].timportant = '';
+			}
 		}
 		const filteredStarTasks = tasksArray.filter((task) => {
 			return !task.tid.toString().includes(e.target.parentNode.id);
@@ -125,27 +129,21 @@ function toggleForClassCircle(e){
 		e.target.nextElementSibling.children[0].classList.toggle('completed');
 		e.target.parentNode.classList.remove('task-');
 		e.target.parentNode.classList.toggle('task-completed');
-		console.log(e.target.parentNode.id);
-		console.log(tasksArray);
 		const filteredCircleTask = tasksArray.filter((task) => {
 			return task.tid.toString().includes(e.target.parentNode.id);
 		});
-		if(filteredCircleTask.length === 1){
-			toggleProperty(filteredCircleTask[0].tcompleted, 'completed');
+		if(filteredCircleTask.length == 1){
+			if(filteredCircleTask[0].tcompleted === ''){
+				filteredCircleTask[0].tcompleted = 'completed';
+			}
+			else {
+				filteredCircleTask[0].tcompleted = '';
+			}
 		}
 		const filteredCircleTasks = tasksArray.filter((task) => {
 			return !task.tid.toString().includes(e.target.parentNode.id);
 		});
 		tasksArray = filteredCircleTasks.concat(filteredCircleTask);
 		localStorage.setItem("tasks", JSON.stringify(tasksArray));
-	}
-}
-
-function toggleProperty(property, str){
-	if(property === ''){
-		property = str;
-	}
-	else {
-		property = '';
 	}
 }
