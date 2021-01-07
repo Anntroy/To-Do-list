@@ -68,10 +68,22 @@ function validateTaskModal(e){
 			}
 		break;
 		case 'completed':
-			createTask.ccompleted = 'completed'
+			console.log(e.target.value);
+			if(e.target.value == 'on'){
+				createTask.ccompleted = 'completed';
+			}
+			else {
+				createTask.ccompleted = '';
+			}
 		break;
 		case 'important':
-			createTask.cimportant = 'important';
+			console.log(e.target.value);
+			if(e.target.value == 'on'){
+				createTask.cimportant = 'important';
+			}
+			else {
+				createTask.cimportant = '';
+			}
 		break;
 		case 'custom_lists':
 			createTask.ccustom = 'true';

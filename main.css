@@ -15,8 +15,15 @@ html {
 
 :root {
     --black: #000000;
+    --task-grey: #eee;
+    --task-grey-completed: rgb(119, 118, 118);
+    --tasks_list: #54adf7;
+    --important_list: #c25048;
+    --completed_list: #4CAF50;
+    --custom_list: #8a5987;
     --light-grey: #f1f1f1;
     --middle-dark: rgb(85, 85, 85);
+    --white: white;
     --white-title: rgb(248, 246, 246);
     --red-error: rgb(192, 10, 10);
     --dark: #30333b;
@@ -24,7 +31,8 @@ html {
     --green: rgb(72, 153, 72);
     --yellow: rgb(255, 255, 101);
     --brown: rgb(205,133,63);
-    --grey: grey;
+    --orange: orange;
+    --grey: rgb(163, 161, 161);
     --pink: pink;
     --blue: blue;
 }
@@ -154,7 +162,7 @@ html {
     border: none;
     display: inline-block;
     border-radius: 5px;
-    background-color: white;
+    background-color: var(--white);
 }
 
 .dialog__form-div-input:focus, .dialog__form-div-textarea:focus {
@@ -265,7 +273,7 @@ html {
     list-style-type: none;
     border: 1px solid var(--middle-dark);
     border-radius: 5px;
-    background: #eee;
+    background: var(--task-grey);
     font-size: 1.4rem;
     transition: 0.2s;
 
@@ -301,7 +309,7 @@ html {
 }
 
 .important {
-    color: orange;
+    color: var(--orange);
 }
 
 .completed {
@@ -338,7 +346,7 @@ html {
 }
 
 .task-completed {
-    background: #888;
+    background: var(--task-grey-completed);
 }
 
 
@@ -371,22 +379,22 @@ html {
 
 #tasks_list {
     top: 16vh;
-    background-color: #2196F3;
+    background-color: var(--tasks_list);
 }
 
 #important_list {
     top: 30vh;
-    background-color: #c4352b;
+    background-color: var(--important_list);
 }
 
 #completed_list {
     top: 44vh;
-    background-color: #4CAF50;
+    background-color: var(--completed_list);
 }
 
 #custom_list {
     top: 58vh;
-    background-color:#882483;
+    background-color: var(--custom_list);
 }
 
 
