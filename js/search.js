@@ -1,6 +1,5 @@
-inputSearch.addEventListener('keyup', searchTasks);
-
 function searchTasks(e){
+
     const searchString = e.target.value.toLowerCase();
 
     const searchedTasks = tasksArray.filter((task) => {
@@ -20,4 +19,5 @@ function searchTasks(e){
     removeAsideOpen();
     tasksList.innerHTML = displayTasks(searchedTasks, "fa-circle");
     tasksList.innerHTML += displayTasks(searchedTasksChecked, "fa-check-circle");
+
 }

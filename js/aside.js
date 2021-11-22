@@ -1,5 +1,3 @@
-aside.addEventListener('click', openAsideList);
-
 function openAsideList(e){
     inputSearch.value = '';
     switch (e.target.id) {

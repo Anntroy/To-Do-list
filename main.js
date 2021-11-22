@@ -40,16 +40,22 @@ let currantTaskId = [0];
 
 window.addEventListener('load', loadTasks);
 window.addEventListener('load', displayMainTasks);
-tasksList.addEventListener('click', toggleForClassStar);
-tasksList.addEventListener('click', toggleForClassCircle);
 
 function loadTasks(){
+
 	if(JSON.parse(localStorage.getItem("tasks")) !== null){
 		tasksArray = JSON.parse(localStorage.getItem("tasks"));
 	}
+
 }
 
 const displayTasks = (tasks, checked) => {
+
+	addTask.addEventListener('click', openAddTaskModal);
+	inputSearch.addEventListener('keyup', searchTasks);
+	aside.addEventListener('click', openAsideList);
+	tasksList.addEventListener('click', toggleForClassStar);
+	tasksList.addEventListener('click', toggleForClassCircle);
 
 	const htmlString = tasks
 		.map((task) => {
@@ -92,6 +98,7 @@ else {
 }
 
 function displayMainTasks(){
+
 	const mainTasks = tasksArray.filter((task) => {
 		return (
 			!task.tcompleted.includes('completed') &&
@@ -99,9 +106,11 @@ function displayMainTasks(){
 		);
 	});
 	tasksList.innerHTML = displayTasks(mainTasks, "fa-circle");
+
 }
 
 function toggleForClassStar(e){
+
 	if(e.target.classList.contains('star')){
 		e.target.classList.toggle('important');
 		const filteredStarTask = tasksArray.filter((task) => {
@@ -121,9 +130,11 @@ function toggleForClassStar(e){
 		tasksArray = filteredStarTasks.concat(filteredStarTask);
 		localStorage.setItem("tasks", JSON.stringify(tasksArray));
 	}
+
 }
 
 function toggleForClassCircle(e){
+
 	if(e.target.classList.contains('circle')){
 		toggleCircleIcon(e.target);
 		e.target.nextElementSibling.children[0].classList.toggle('completed');
@@ -146,4 +157,5 @@ function toggleForClassCircle(e){
 		tasksArray = filteredCircleTasks.concat(filteredCircleTask);
 		localStorage.setItem("tasks", JSON.stringify(tasksArray));
 	}
+
 }

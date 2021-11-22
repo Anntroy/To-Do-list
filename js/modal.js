@@ -1,17 +1,39 @@
-addTask.addEventListener('click', openAddTaskModal);
-form.addEventListener('change', validateTaskModal);
-cancelBtn.addEventListener('click', closeAddTaskModal);
-createBtn.addEventListener('click', createNewTask);
-title.addEventListener('blur', validateTaskObligatoryFilds);
-description.addEventListener('blur', validateTaskObligatoryFilds);
-dialog.addEventListener('transitionend', focusInsideModal)
-
 function openAddTaskModal(){
-    dialog.showModal();
+
+	dialog.showModal();
+
+	addTask.removeEventListener('click', openAddTaskModal);
+	tasksList.removeEventListener('click', toggleForClassStar);
+	tasksList.removeEventListener('click', toggleForClassCircle);
+	aside.removeEventListener('click', openAsideList);
+	inputSearch.removeEventListener('keyup', searchTasks);
+
+	form.addEventListener('change', validateTaskModal);
+	cancelBtn.addEventListener('click', closeAddTaskModal);
+	createBtn.addEventListener('click', createNewTask);
+	title.addEventListener('blur', validateTaskObligatoryFilds);
+	description.addEventListener('blur', validateTaskObligatoryFilds);
+	dialog.addEventListener('transitionend', focusInsideModal)
+
 }
 
 function closeAddTaskModal(){
-    dialog.close()
+
+	dialog.close();
+
+	addTask.addEventListener('click', openAddTaskModal);
+	tasksList.addEventListener('click', toggleForClassStar);
+	tasksList.addEventListener('click', toggleForClassCircle);
+	aside.addEventListener('click', openAsideList);
+	inputSearch.addEventListener('keyup', searchTasks);
+
+	form.removeEventListener('change', validateTaskModal);
+	cancelBtn.removeEventListener('click', closeAddTaskModal);
+	createBtn.removeEventListener('click', createNewTask);
+	title.removeEventListener('blur', validateTaskObligatoryFilds);
+	description.removeEventListener('blur', validateTaskObligatoryFilds);
+	dialog.removeEventListener('transitionend', focusInsideModal);
+
 }
 
 function focusInsideModal () {
@@ -68,8 +90,7 @@ function validateTaskModal(e){
 			}
 		break;
 		case 'completed':
-			console.log(e.target.value);
-			if(e.target.value == 'on'){
+			if(e.target.checked === true){
 				createTask.ccompleted = 'completed';
 			}
 			else {
@@ -77,8 +98,7 @@ function validateTaskModal(e){
 			}
 		break;
 		case 'important':
-			console.log(e.target.value);
-			if(e.target.value == 'on'){
+			if(e.target.checked === true){
 				createTask.cimportant = 'important';
 			}
 			else {
